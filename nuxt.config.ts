@@ -60,8 +60,8 @@ export default defineNuxtConfig({
   antd: {
     extractStyle: true, // 开启 SSR 样式抽取（防止闪烁）
   },
-  // @ts-ignore  自动导入好像没有，先忽略，先手动导入
   pinia: {
+    // @ts-ignore  自动导入好像没有，先忽略，先手动导入
     autoImports: ['defineStore', 'storeToRefs'],
     storesDirs: ['./app/stores/**'],
   },
