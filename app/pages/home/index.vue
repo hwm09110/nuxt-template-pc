@@ -22,10 +22,12 @@
   const activePageIndex = ref(0);
   const HomeApi = useHomeApi();
   const res = await HomeApi.getMsgListSSR();
-  console.log('getMsgList ->res', res);
+  console.log('getMsgList ->res', res, res?.data);
 
   function handlFetchData() {
-    HomeApi.getMsgList({ page: 1 });
+    HomeApi.getMsgList({ page: 1 }).then((res) => {
+      console.log('getMsgList ->res', res);
+    });
   }
 
   function handlPostData() {

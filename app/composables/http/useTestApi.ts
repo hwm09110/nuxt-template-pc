@@ -1,17 +1,20 @@
+import { useHttp } from './useHttp';
 export const useTestApi = () => {
+  const http = useHttp();
+
   const getMsgListSSR = () => {
-    return useAsyncData(() => $api('index/Operate/getMsgList'));
+    return useAsyncData(() => http('/index/Operate/getMsgList'));
   };
 
   const getMsgList = (query: any) => {
-    return $api('index/Operate/getMsgList', {
+    return http('/index/Operate/getMsgList', {
       method: 'get',
       query,
     });
   };
 
   const postMsg = (body: any) => {
-    return $api('index/Operate/getMsgList', {
+    return http('/index/Operate/getMsgList', {
       method: 'post',
       body,
     });

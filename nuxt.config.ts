@@ -7,6 +7,13 @@ export default defineNuxtConfig({
   ssr: process.env.NUXT_APP_SSR ? (process.env.NUXT_APP_SSR === 'false' ? false : true) : true,
   nitro: {
     preset: process.env.NUXT_APP_NITRO_PRESET || 'node-server', // static | node-server
+    devProxy: {
+      '/api': {
+        target: 'http://www.gzhtedu.cn',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
   spaLoadingTemplate: './spaLoadingTemplate.html',
   app: {
@@ -23,7 +30,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBase: '', // 留空 不用写，自动映射.env
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || '',
+      // apiBase: '', // 自动映射.env NUXT_PUBLIC_API_BASE
     },
   },
   imports: {
@@ -60,8 +68,8 @@ export default defineNuxtConfig({
   antd: {
     extractStyle: true, // 开启 SSR 样式抽取（防止闪烁）
   },
+  // @ts-ignore  自动导入好像没有，先忽略，先手动导入
   pinia: {
-    // @ts-ignore  自动导入好像没有，先忽略，先手动导入
     autoImports: ['defineStore', 'storeToRefs'],
     storesDirs: ['./app/stores/**'],
   },
